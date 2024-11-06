@@ -1,6 +1,5 @@
 <?php
-require_once '../models/Defi.php';
-require_once '../../config/db.php';
+require_once getAbsolutePath('/app/Model/Defi.php');
 
 class DefiController {
     private $db;

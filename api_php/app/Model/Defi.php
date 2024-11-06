@@ -1,5 +1,4 @@
 <?php
-include_once('../../config/Database.php');
 
 class Defi {
     private $conn;
