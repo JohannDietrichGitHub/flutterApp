@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projet_flutter/screens/gameSelectorScreen.dart';
 import 'package:projet_flutter/screens/PageNotFound.dart';
+import 'package:projet_flutter/screens/defiScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,18 +47,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final Map<String, Widget Function(int)> pageRoutes = {
     'gameselectorscreen': (testValue) => gameSelectorScreen(testValue: testValue),
+    'defiScreen': (testValue) => DefiScreen(),
 
   };
 
   void _navigateToPage(String pageTitle) {
     if (pageRoutes.containsKey(pageTitle)) {
-      // Si la route existe, navigue vers la page correspondante
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => pageRoutes[pageTitle]!(_testValue)),
       );
     } else {
-      // Si la route n'existe pas, navigue vers une page par défaut (ex: Page not found)
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const PageNotFound()),
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () => _navigateToPage('someOtherPage'),
+                  onPressed: () => _navigateToPage('defiScreen'),
                   child: const Text('Button 3'),
                 ),
                 const SizedBox(width: 20),

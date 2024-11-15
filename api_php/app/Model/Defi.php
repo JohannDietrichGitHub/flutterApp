@@ -2,7 +2,7 @@
 
 class Defi {
     private $conn;
-    private $table = "defi"; 
+    private $table = "cartes_defi"; 
 
     public $id_cartes_defi;
     public $points;
