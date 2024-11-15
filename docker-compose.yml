@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  flutter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flutter_app
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ["bash"]
+    ports:
+      - "3000:3000" # Port pour l'app Flutter Web, si nécessaire
+    depends_on:
+      - php
+      - mysql
+
+  php:
+    image: php:8.0-apache
+    container_name: php_app
+    volumes:
+      - ./backend:/var/www/html # Le dossier de ton backend PHP
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: example
+      MYSQL_DATABASE: my_database
+    ports:
+      - "8080:80" # Port pour accéder à l'API PHP
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: my_database
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
