@@ -1,25 +1,17 @@
 services:
   flutter:
     build:
-      context: ./projet_flutter  # Chemin vers le répertoire du projet Flutter
+      context: ./projet_flutter
       dockerfile: Dockerfile
     container_name: flutter_app
     volumes:
-      - ./projet_flutter:/app  # Volume correspondant au projet Flutter
-      - /tmp/.X11-unix:/tmp/.X11-unix  # Monter le socket X11 de l'hôte pour l'accès graphique
+      - ./projet_flutter:/app
     working_dir: /app
-    command: ["flutter", "run"]
+    command: ["flutter", "run", "-d", "web-server", "--web-port=3000", "--web-hostname=0.0.0.0"]
     ports:
-      - "3000:3000"  # Port pour l'application Flutter Web (si utilisé)
-    environment:
-      - DISPLAY=${DISPLAY}  # Passer la variable d'environnement DISPLAY pour l'accès à l'affichage
-      - GDK_BACKEND=x11
-    extra_hosts:
-      - "host.docker.internal:host-gateway"  # Pour accéder à la machine hôte si nécessaire
+      - "3000:3000"  # Port pour l'application Flutter Web
     networks:
       - app_network
-    devices:
-      - "/dev/dri:/dev/dri"  # Permet l'accélération matérielle (optionnel mais recommandé pour la performance)
 
   php:
     image: php:8.0-apache
