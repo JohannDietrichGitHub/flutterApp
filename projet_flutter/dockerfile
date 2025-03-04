@@ -19,6 +19,7 @@ WORKDIR /app
 COPY . /app
 
 RUN flutter pub get
+RUN flutter pub run flutter_native_splash:create
 
 # Commande par défaut
 CMD ["bash"]
